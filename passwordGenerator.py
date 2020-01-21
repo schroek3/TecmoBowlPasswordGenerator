@@ -19,7 +19,7 @@ lastBaseDict={"SFO":SFObaseDict}
 #----------main-----------------------------------------------------------------
 def main():
   human="SFO"
-  defeated=["DNV","WAS","MIN","MIA","DAL","CHI","NYG","IND","SEA"]
+  defeated=["DNV","WAS","MIN","MIA","DAL","CHI","NYG","IND","SEA","LAR"]
   code=getCode(human,masterDict,defeatedDict,lastBaseDict,defeated).upper()
   print("\n***Compiling password***\n")
   printCode(code,human,defeated)
@@ -147,11 +147,15 @@ def transformCG(human,CGH,defeated,defeatedDict):
   C=hexToDecimal(CGH[0])
   G=hexToDecimal(CGH[1])
   for team in defeated:
-    if defeatedDict[team]>16:
+    if defeatedDict[team]>=16:
       addSum+=baseDigitMod(defeatedDict[team])
-  if defeatedDict[human]>16:
+      print("sum = %s after adding %s" % (addSum,team))
+  if defeatedDict[human]>=16:
     addSum+=baseDigitMod(defeatedDict[human])
+    print("sum = %s after adding %s" % (addSum,human))
+  print("C = %s" % C)
   temp=C+addSum
+  print("Temp = %s" % temp)
   nums=justHex(temp)
   C=nums[-1]
   #if len(nums >1), that means that C rolled over, roll over gets added to G
